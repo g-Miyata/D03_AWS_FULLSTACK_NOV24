@@ -3,25 +3,25 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Plant {
-  id                  Int      @id @default(autoincrement())
-  name                String
-  subtitle            String
-  label               String   
-  price               Float
-  isInSale            Boolean
-  discountPercentage  Float
-  features            String  
-  description         String
-  imgUrl              String
-  type                Type      @relation(fields: [typeId], references: [id])
-  typeId              Int       
+  id                 Int     @id @default(autoincrement())
+  name               String
+  subtitle           String
+  label              String
+  price              Float
+  isInSale           Boolean
+  discountPercentage Float
+  features           String
+  description        String
+  imgUrl             String
+  typeId             Int
+  type               Type    @relation(fields: [typeId], references: [id])
 }
- 
+
 model Type {
   id       Int     @id @default(autoincrement())
   typeName String
