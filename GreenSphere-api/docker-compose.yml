@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: green_api
     environment:
-      DATABASE_URL: 'postgresql://postgres:12062708@postgres_db:5432/desafio3'
+      DATABASE_URL: 'postgresql://postgres:12062708@18.223.206.68:5432/desafio3'
     ports:
       - '3000:3000'
     restart: always
