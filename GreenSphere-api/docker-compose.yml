@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12062708
+      POSTGRES_DB: desafio3
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: green_api
+    environment:
+      DATABASE_URL: 'postgresql://postgres:12062708@postgres_db:5432/desafio3'
+    ports:
+      - '3000:3000'
+    restart: always
+
+volumes:
+  postgres_data:
