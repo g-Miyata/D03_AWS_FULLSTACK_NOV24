@@ -68,13 +68,15 @@ graph TD;
     Nodejs -->Instância
     Instância-->A;
     A{Já tem a instância de PostgreSQL?}-->|NÃO|PostgreSQL-EC2
+    API-EC2--->|Restrigir IP de comunicação do Postgre para somente o IP da API|SecurityGroup-AWS;
     PostgreSQL-EC2-->API-EC2
     A{Já tem a instância de PostgreSQL?}-->|SIM
     Configurar API com o IP da instância do PostgreSQL |API-EC2;
     Frontend-->React;
     API-EC2--->Integração;
-    Frontend-S3--->Integração;
+    Frontend-S3--->|AllowPublicAccess|Integração;
     React----->|Site estático|Frontend-S3;
+
     Integração -->Testes
     Testes-->App-Disponibilizado;
 ```
