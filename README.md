@@ -712,7 +712,7 @@ To maintain a consistent codebase, please follow these guidelines:
 - [📚 Clerk Docs](https://clerk.com/docs/quickstarts/setup-clerk)
 - [🎥 Clerk Video Example](https://www.youtube.com/watch?v=QQ2DkD6rqSs&t=1153s)
 - [📚 Splide React Docs](https://splidejs.com/integration/react-splide/)
-- [🧐 Some Splie Examples](https://splidejs.com/)
+- [🧐 Some Splipe Examples](https://splidejs.com/)
 - [🎥 Splie Video Example](https://www.youtube.com/watch?v=NR9cyUTMmNo)
 - [🔀 React Router](https://reactrouter.com/home)
 - [📝 Commit pattern](https://www.conventionalcommits.org/en/v1.0.0/)
