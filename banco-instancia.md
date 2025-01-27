@@ -89,8 +89,9 @@ Siga os passos:
 ![alt text](./md/images/image-12.png)
 ![alt text](./md/images/image-14.png)
 
-> [!TIP]
-> Escolha a imagem do Ubuntu (já possui git instalado)
+<div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.3);">
+  <strong>Tip:</strong> Escolha a imagem do Ubuntu (já possui git instalado).
+</div>
 
 ![alt text](./md/images/image-15.png)
 ![alt text](./md/images/image-17.png)

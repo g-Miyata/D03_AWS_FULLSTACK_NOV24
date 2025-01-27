@@ -36,8 +36,9 @@ Antes de criar o S3:
 npm run build
 ```
 
-> [!WARNING]
-> Certifique-se de que o script de build está configurado corretamente no <kbd>package.json</kbd>:
+<div style="border-left: 4px solid #FF9800; padding: 10px; background: rgba(255, 152, 0, 0.2);">
+  <strong>Warning:</strong> Certifique-se de que o script de build está configurado corretamente no <kbd>package.json</kbd>:
+</div>
 
 ```json
   "scripts": {
@@ -62,8 +63,9 @@ npm run build
    ![alt text](./md/images/image-21.png)
    ![alt text](./md/images/image-23.png)
 
-   > [!IMPORTANT]
-   > Remova o bloqueio a acesso público
+    <div style="border-left: 4px solid #F44336; padding: 10px; background: rgba(244, 67, 54, 0.1);">
+    <strong>Caution:</strong> Remova o bloqueio a acesso público
+    </div>
 
    ![alt text](./md/images/image-24.png)
    ![alt text](./md/images/image-25.png)
@@ -93,8 +95,9 @@ npm run build
 
     </div>
 
-> [!IMPORTANT]
-> Certifique-se de sua política estar assim ao final:
+<div style="border-left: 4px solid #F44336; padding: 10px; background: rgba(244, 67, 54, 0.1);">
+  <strong>Caution:</strong> Certifique-se de sua política estar assim ao final:
+</div>
 
 ```json
 {
@@ -113,8 +116,9 @@ npm run build
 
 <div align="center">
 
-> [!IMPORTANT]
-> Agora selecione todos os seus arquivos e torne-os públicos:
+<div style="border-left: 4px solid #F44336; padding: 10px; background: rgba(244, 67, 54, 0.1);">
+  <strong>Caution:</strong> Agora selecione todos os seus arquivos e torne-os públicos:
+</div>
 
 ![alt text](./md/images/image-34.png)
 
@@ -126,11 +130,13 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 
 </div>
 
-> [!NOTE]
-> Se aparecer erro de acesso negado, revise as configurações de bloqueio público e permissões.
+<div style="border-left: 4px solid #2196F3; padding: 10px; background: rgba(33, 150, 243, 0.1);">
+  <strong>Note:</strong> Se aparecer erro de acesso negado, revise as configurações de bloqueio público e permissões.
+</div>
 
-> [!TIP]
-> Caso ainda tenha dúvidas verifique [🎥 Deploy React no S3 da AWS](https://www.youtube.com/watch?v=vosy6rEeOiw)
+<div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.1);">
+  <strong>Tip:</strong> Caso ainda tenha dúvidas verifique vídeo "Deploy React no S3 da AWS" em links úteis.
+</div>
 
 <h2 id="resources">📄 Links úteis</h2>
 
