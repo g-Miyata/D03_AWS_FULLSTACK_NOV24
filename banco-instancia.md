@@ -80,19 +80,21 @@ Crie uma chave
 ![alt text](./md/images/image-chave.png)
 ![alt text](./md/images/image-create.png)
 
+</div>
+
 > [!IMPORTANT]
->
->  <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
 > Atente-se ao local onde foi realizado o download da chave.
-> </div>
+
+<div align="center">
 
 ![alt text](./md/images/image-download.png)
 
+</div>
+
 > [!TIP]
->
-> <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.3);">
->  <strong>Tip:</strong> Escolha a imagem do Ubuntu, pois ela já vem com o Git instalado.
-> </div>
+> Escolha a imagem do Ubuntu, pois ela já vem com o Git instalado.
+
+<div align="center">
 
 ![alt text](./md/images/image-15.png)
 ![alt text](./md/images/image-17.png)
