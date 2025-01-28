@@ -28,7 +28,6 @@ jobs:
           cd /home/ubuntu/D03_AWS_FULLSTACK_NOV24
           git pull origin main
           docker compose down
-          sleep 5
           docker compose up -d api
           EOF
 
