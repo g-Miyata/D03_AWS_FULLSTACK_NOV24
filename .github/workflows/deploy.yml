@@ -26,9 +26,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST << 'EOF'
           set -e
           cd /home/ubuntu/D03_AWS_FULLSTACK_NOV24
-          git reset --hard origin/main  # Reseta para garantir que não há conflitos
           git pull origin main
-          docker compose down  # Sem -v para não perder o banco
+          docker compose down
+          sleep 5
           docker compose up -d api
           EOF
 
@@ -52,4 +52,4 @@ jobs:
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          aws s3 sync GreenSphere-web/dist/ s3://frontend-green-sphere --acl public-read
+          aws s3 sync GreenSphere-web/dist/ s3://frontend-green-sphere --profile Miyata
