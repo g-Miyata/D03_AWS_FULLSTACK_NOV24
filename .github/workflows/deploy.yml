@@ -28,7 +28,7 @@ jobs:
           cd /home/ubuntu/D03_AWS_FULLSTACK_NOV24
           git stash
           git pull origin main
-          docker compose down
+          docker compose down -v
           docker compose up -d api
           EOF
 
@@ -51,4 +51,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          aws s3 sync GreenSphere-web/dist/ s3://frontend-green-sphere --acl public-read
+          aws s3 sync GreenSphere-web/dist/ s3://frontend-green-sphere --profile Miyata
