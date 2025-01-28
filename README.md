@@ -48,6 +48,7 @@ O projeto foi implementado utilizando React, TypeScript e Clerk para autenticaç
 
 **Dados para login na aplicação:**
 
+- Link de acesso: ***https://tinyurl.com/green-sphere-store***
 - Clique em Sign In na tela inicial;
 - Clique para logar com google;
 
@@ -66,17 +67,13 @@ O projeto foi implementado utilizando React, TypeScript e Clerk para autenticaç
 graph TD;
     Backend -->Nodejs;
     Nodejs -->Instância
-    Instância-->A;
-    A{Já tem a instância de PostgreSQL?}-->|NÃO|PostgreSQL-EC2
+    Instância-->PostgreSQL-EC2
     API-EC2--->|Restrigir IP de comunicação do Postgre para somente o IP da API|SecurityGroup-AWS;
-    PostgreSQL-EC2-->API-EC2
-    A{Já tem a instância de PostgreSQL?}-->|SIM
-    Configurar API com o IP da instância do PostgreSQL |API-EC2;
+    PostgreSQL-EC2-->|Configurar API com o IP da instância do PostgreSQL|API-EC2;
     Frontend-->React;
-    API-EC2--->Integração;
-    Frontend-S3--->|AllowPublicAccess|Integração;
-    React----->|Site estático|Frontend-S3;
-
+    API-EC2---->Integração;
+    Frontend-S3---->|Configurar para hospedar Site estático|Integração;
+    React---->|AllowPublicAccess|Frontend-S3;
     Integração -->Testes
     Testes-->App-Disponibilizado;
 ```

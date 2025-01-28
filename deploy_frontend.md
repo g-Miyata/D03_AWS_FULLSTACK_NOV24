@@ -50,8 +50,7 @@ npm run build
 >
 > <div style="border-left: 4px solid #FF9800; padding: 10px; background: rgba(255, 152, 0, 0.2);">
 > Certifique-se de que o script de build está configurado corretamente no <kbd>package.json</kbd>:
-
-</div>
+> </div>
 
 ```json
   "scripts": {
@@ -72,17 +71,16 @@ npm run build
 
 2.  Siga os passos com atenção:
 
-    <div align="center">
+<div align="center">
 
 ![alt text](./md/images/image-21.png)
 ![alt text](./md/images/image-23.png)
 
 > [!IMPORTANT]
 >
->   <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
+>  <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
 >  <strong>Caution:</strong> Remova o bloqueio a acesso público
-
-</div>
+>  </div>
 
 ![alt text](./md/images/image-24.png)
 ![alt text](./md/images/image-25.png)
@@ -114,8 +112,9 @@ Vá na aba de permissões e adicione uma política para permitir acesso público
 >
 >   <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
 >   Certifique-se de sua política estar assim ao final:
+>   </div>
 
-  </div>
+</div>
 
 ```json
 {
@@ -138,8 +137,7 @@ Vá na aba de permissões e adicione uma política para permitir acesso público
 >
 >   <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
 >   Agora selecione todos os seus arquivos e torne-os públicos:
-
-</div>
+>   </div>
 
 ![alt text](./md/images/image-34.png)
 
@@ -155,22 +153,50 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 >
 > <div style="border-left: 4px solid #2196F3; padding: 10px; background: rgba(33, 150, 243, 0.1);">
 > Parabéns por chegar até aqui! Você concluiu com sucesso o deploy da aplicação. 🎉
+> </div>
 
-</div>
+<details>
+<summary>✅ Todo-List</summary>
+
+1. - [x] [**Criação e Configuração da Instância EC2 do banco de dados na AWS**](./banco-instancia.md)
+   - - [x] Configurar security group para abrir a porta 5432 para a instância da API.
+   - - [x] Adicionar configurar, no diretório da API, um service:postgres no <kbd>docker-compose.yml</kbd> para criar container do postgres
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container do PostgreSQL
+2. - [x] [**Criação e Configuração da Instância EC2 da API em nodejs na AWS**](./api-instancia.md)
+   - - [x] Configurar security group para abrir a porta 3000 para teste externo e comunicação com o frontend
+   - - [x] Mudar o IP de comunicação com o banco de dados para **_<IP da instância>:5432_**
+   - - [x] Adicionar configurar, no diretório da API, um <kbd>Dockerfile</kbd> um service:api no <kbd>docker-compose.yml</kbd> para criar container da API
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container da API
+3. - [x] [**Deploy do Frontend**](./deploy_frontend.md)
+   - - [x] Atualizar a URL da API no frontend para o IP da instância da API "http://<IP-da-instância-API>:3000"
+   - - [x] Criar Bucket para hospedagem de sites estáticos no S3 com permissão de acesso público
+   - - [x] Fazer o upload dos arquivos do build para o bucket do S3.
+4. - [x] Realizar testes
+   - - [x] **Banco de Dados:** Verificação das tabelas e dados inseridos manualmente.
+   - - [x] **API:** Testes de requisições no Insomnia ou Postman confirmando comunicação com o banco.
+   - - [x] **Frontend:** Requisições bem-sucedidas ao backend hospedado na instância da API.
+
+</details>
+
+<br>
 
 > [!NOTE]
 >
 > <div style="border-left: 4px solid #2196F3; padding: 10px; background: rgba(33, 150, 243, 0.1);">
 >  Se encontrar um erro de "Acesso Negado", revise as configurações de bloqueio público e permissões no S3.
-
-</div>
+> </div>
 
 > [!TIP]
 >
 > <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.1);">
 > Ainda tem dúvidas? Confira o vídeo "Deploy React no S3 da AWS" na seção de links úteis para obter mais detalhes.
-
-</div>
+> </div>
 
 <h2 id="colab">🖌 Autor</h2>
 
@@ -192,6 +218,6 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 <h2 id="resources">📄 Links úteis</h2>
 
 - [🎥 Deploy React no S3 da AWS](https://www.youtube.com/watch?v=vosy6rEeOiw)
-- [📚 Backend Deploy](./deploy_backend.md)
-- [📚 Instância API](./api-instancia.md)
-- [📚 Instância DB](./banco-instancia.md)
+- [🛢️ Backend Deploy](./deploy_backend.md)
+- [🛢️ Instância API](./api-instancia.md)
+- [🛢️ Instância DB](./banco-instancia.md)
