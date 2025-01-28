@@ -84,8 +84,7 @@ Crie uma chave
 >
 >  <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
 > Atente-se ao local onde foi realizado o download da chave.
-
-</div>
+> </div>
 
 ![alt text](./md/images/image-download.png)
 
@@ -93,8 +92,7 @@ Crie uma chave
 >
 > <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.3);">
 >  <strong>Tip:</strong> Escolha a imagem do Ubuntu, pois ela já vem com o Git instalado.
-
-</div>
+> </div>
 
 ![alt text](./md/images/image-15.png)
 ![alt text](./md/images/image-17.png)
@@ -102,7 +100,7 @@ Crie uma chave
 
 </div>
 
-<h2 id="connect">📌 Conectar com a Instância</h2>
+<h2 id="connect">🔗 Conectar com a Instância</h2>
 
 Verifique a instância criadas:
 
@@ -143,6 +141,35 @@ Com isso você terá sua a confirmação de que sua instância do Banco de Dados
 3.  [Configurar Instância da API](./deploy_backend.md)
 4.  [Deploy Frontend](./deploy_frontend.md)
 
+<details>
+<summary>✅ Todo-List</summary>
+
+1. - [ ] [**Criação e Configuração da Instância EC2 do banco de dados na AWS**](./banco-instancia.md)
+   - - [x] Configurar security group para abrir a porta 5432 para a instância da API.
+   - - [x] Adicionar configurar, no diretório da API, um service:postgres no <kbd>docker-compose.yml</kbd> para criar container do postgres
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [ ] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [ ] Baixar resposiório do GitHub
+   - - [ ] Realizar o docker-compose up do container do PostgreSQL
+2. - [ ] [**Criação e Configuração da Instância EC2 da API em nodejs na AWS**](./api-instancia.md)
+   - - [ ] Configurar security group para abrir a porta 3000 para teste externo e comunicação com o frontend
+   - - [ ] Mudar o IP de comunicação com o banco de dados para **_<IP da instância>:5432_**
+   - - [ ] Adicionar configurar, no diretório da API, um <kbd>Dockerfile</kbd> um service:api no <kbd>docker-compose.yml</kbd> para criar container da API
+   - - [ ] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [ ] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [ ] Baixar resposiório do GitHub
+   - - [ ] Realizar o docker-compose up do container da API
+3. - [ ] [**Deploy do Frontend**](./deploy_frontend.md)
+   - - [ ] Atualizar a URL da API no frontend para o IP da instância da API "http://<IP-da-instância-API>:3000"
+   - - [ ] Criar Bucket para hospedagem de sites estáticos no S3 com permissão de acesso público
+   - - [ ] Fazer o upload dos arquivos do build para o bucket do S3.
+4. - [ ] Realizar testes
+   - - [ ] **Banco de Dados:** Verificação das tabelas e dados inseridos manualmente.
+   - - [ ] **API:** Testes de requisições no Insomnia ou Postman confirmando comunicação com o banco.
+   - - [ ] **Frontend:** Requisições bem-sucedidas ao backend hospedado na instância da API.
+
+</details>
+
 <h2 id="colab">🖌 Autor</h2>
 
 <table align="center">
@@ -162,6 +189,6 @@ Com isso você terá sua a confirmação de que sua instância do Banco de Dados
 
 <h2 id="resources">📄 Links úteis</h2>
 
-- [📚 Backend Deploy](./deploy_backend.md)
-- [🎥 Frontend Deploy](./deploy_frontend.md)
-- [📚 Instância API](./api-instancia.md)
+- [🛢️ Backend Deploy](./deploy_backend.md)
+- [⚛ Frontend Deploy](./deploy_frontend.md)
+- [🛢️ Instância API](./api-instancia.md)

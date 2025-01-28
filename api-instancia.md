@@ -24,7 +24,16 @@ Este documento detalha os passos para configurar uma instância EC2 na Amazon AW
 
 Antes de criar a instância EC2, siga as etapas abaixo:
 
-### 1. Criar VPC (Virtual Private Cloud)
+### 1. Ajustar o IP de comunicação com o banco de dados
+
+```javascript
+POSTGRES_USER=seu-user
+POSTGRES_PASSWORD=sua-senha
+POSTGRES_DB=nome-db
+DATABASE_URL=postgresql://seu-user:sua-senha@IP-do-banco:5432/nome-db
+```
+
+### 2. Criar VPC (Virtual Private Cloud)
 
 Pode utilizar a mesma do Banco de Dados, caso ja tenha criado, se não:
 
@@ -36,26 +45,23 @@ Siga as [instruções detalhadas aqui](https://israelbarberino-dev.notion.site/V
 
 </div>
 
-2. Criar Security Group
+### 3. Criar Security Group
 
-   1. Selecione a opção
+1.  Selecione a opção
 
     <div align="center">
-    
+
     ![alt text](./md/images/image-s.png)
 
     </div>
 
-   2. No console da AWS, crie um novo **Security Group** que será usado tanto para a API quanto para o banco de dados:
+2.  No console da AWS, crie um novo **Security Group** que será usado tanto para a API quanto para o banco de dados:
 
-    <div align="center">
-
-   ![alt text](./md/images/image-2.png)
-   ![alt text](./md/images/image-1314.png)
-   ![alt text](./md/images/image.png)
-   ![alt text](./md/images/image-6.png)
-   ![alt text](./md/images/image-7.png)
-    </div>
+![alt text](./md/images/image-2.png)
+![alt text](./md/images/image-1314.png)
+![alt text](./md/images/image.png)
+![alt text](./md/images/image-6.png)
+![alt text](./md/images/image-7.png)
 
 <h2 id="EC2">💻 Criação da Instância EC2</h2>
 
@@ -83,8 +89,7 @@ Crie uma chave
 >
 >  <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
 > Atente-se ao local onde foi realizado o download da chave.
-
-</div>
+>  </div>
 
 ![alt text](./md/images/image-download.png)
 
@@ -92,8 +97,7 @@ Crie uma chave
 >
 > <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.3);">
 > Escolha a imagem do Ubuntu, pois ela já vem com o Git instalado.
-
-</div>
+> </div>
 
 ![alt text](./md/images/image-15.png)
 ![alt text](./md/images/image-17.png)
@@ -137,6 +141,38 @@ Com isso você terá sua a confirmação de que sua instância da API criada.
 
 <h2 id='next'>🏃🏻‍♀️ Próximos passos</h2>
 
+1.  [Configurar Instância da API](./deploy_backend.md)
+2.  [Deploy Frontend](./deploy_frontend.md)
+
+<details>
+<summary>✅ Todo-List</summary>
+
+1. - [x] [**Criação e Configuração da Instância EC2 do banco de dados na AWS**](./banco-instancia.md)
+   - - [x] Configurar security group para abrir a porta 5432 para a instância da API.
+   - - [x] Adicionar configurar, no diretório da API, um service:postgres no <kbd>docker-compose.yml</kbd> para criar container do postgres
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container do PostgreSQL
+2. - [ ] [**Criação e Configuração da Instância EC2 da API em nodejs na AWS**](./api-instancia.md)
+   - - [x] Configurar security group para abrir a porta 3000 para teste externo e comunicação com o frontend
+   - - [x] Mudar o IP de comunicação com o banco de dados para **_<IP da instância>:5432_**
+   - - [ ] Adicionar configurar, no diretório da API, um <kbd>Dockerfile</kbd> um service:api no <kbd>docker-compose.yml</kbd> para criar container da API
+   - - [ ] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [ ] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [ ] Baixar resposiório do GitHub
+   - - [ ] Realizar o docker-compose up do container da API
+3. - [ ] [**Deploy do Frontend**](./deploy_frontend.md)
+   - - [ ] Atualizar a URL da API no frontend para o IP da instância da API "http://<IP-da-instância-API>:3000"
+   - - [ ] Criar Bucket para hospedagem de sites estáticos no S3 com permissão de acesso público
+   - - [ ] Fazer o upload dos arquivos do build para o bucket do S3.
+4. - [ ] Realizar testes
+   - - [ ] **Banco de Dados:** Verificação das tabelas e dados inseridos manualmente.
+   - - [ ] **API:** Testes de requisições no Insomnia ou Postman confirmando comunicação com o banco.
+   - - [ ] **Frontend:** Requisições bem-sucedidas ao backend hospedado na instância da API.
+
+</details>
+
 <h2 id="colab">🖌 Autor</h2>
 
 <table align="center">
@@ -156,6 +192,6 @@ Com isso você terá sua a confirmação de que sua instância da API criada.
 
 <h2 id="resources">📄 Links úteis</h2>
 
-- [📚 Backend Deploy](./deploy_backend.md)
-- [🎥 Frontend Deploy](./deploy_frontend.md)
-- [📚 Instância DB](./banco-instancia.md)
+- [🛢️ Backend Deploy](./deploy_backend.md)
+- [⚛ Frontend Deploy](./deploy_frontend.md)
+- [🛢️ Instância DB](./banco-instancia.md)

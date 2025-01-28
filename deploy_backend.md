@@ -71,47 +71,99 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
 
   - Atualizar pacotes:
 
-    ```bash
-    sudo apt update
-    ```
+  ```bash
+  sudo apt-get update
+  ```
 
-    ```bash
-    sudo apt upgrade -y
-    ```
+- Instalar os pacotes necessários para a comunicação segura com repositórios (certificados, <kbd>curl</kbd> e suporte para GPG).
 
-  - Instalar o Docker e Docker Compose:
+  ```bash
+  sudo apt-get install ca-certificates curl gnupg
+  ```
 
-    ```bash
-    sudo snap install docker
-    ```
+- Criar o diretório /etc/apt/keyrings com permissões específicas (somente leitura para outros usuários).
 
-  - **Verifique a instalação:**
+  ```bash
+  sudo install -m 0755 -d /etc/apt/keyrings
+  ```
 
-    ```bash
-    docker -v
-    ```
+- Baixar a chave GPG oficial do Docker e a converter para o formato binário necessário (docker.gpg).
 
-    ```bash
-    docker-compose -v
-    ```
+  ```bash
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  ```
 
-    Deverá esse tipo de resposta:
+- Garantir que todos os usuários podem ler a chave (necessário para que o APT reconheça o repositório como confiável).
 
-    ```makefile
-    ubuntu@ip-banco-de-dados:~$ sudo snap install docker
-    docker 27.2.0 from Canonical✓ installed
-    ubuntu@ip-banco-de-dados:~$ docker -v
-    Docker version 27.2.0, build 3ab4256
-    ubuntu@ip-banco-de-dados:~$ docker-compose -v
-    Docker version 27.2.0, build 3ab4256
-    ```
+  ```bash
+  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+  ```
 
-  <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.3);">
+- Adicionar o repositório do Docker
+
+  ```bash
+  echo \
+   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt-get update
+  ```
+
+- Instalar Docker
+
+  ```bash
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  ```
+
+- **Verifique a instalação:**
+
+  ```bash
+  sudo docker run hello-world
+  ```
+
+- O grupo docker existe mas não tem usuários, se quiser rodar sem precisar do <kbd>sudo</kbd>, execute os comandos:
+
+  ```bash
+  sudo groupadd docker
+  ```
+
+  ```bash
+  sudo usermod -aG docker $USER
+  ```
+
+  ```bash
+  newgrp docker
+  ```
+
+- Teste:
+
+  ```bash
+  docker run hello-world
+  ```
+
+  ```bash
+  docker -v
+  ```
+
+  ```bash
+  docker compose version
+  ```
+
+  Deverá esse tipo de resposta:
+
+  ```makefile
+   ubuntu@ip-10-0-3-242:~$ docker -v
+   Docker version 27.5.1, build 9f9e405
+   ubuntu@ip-10-0-3-242:~$ docker compose version
+   Docker Compose version v2.32.4
+  ```
+
+   <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.3);">
 
   Caso encontre dificuldades para chegar nesse resultado assista esse vídeo [AWS FÁCIL: Deploy de aplicação NodeJs + PostgreSQL no EC2](https://www.youtube.com/watch?v=iyiANe9Eszs&t=1483s)<br>
   Ou, se quiser tentar de outra forma, siga esse vídeo [Como fazer um deploy na Aws de uma aplicação no Docker? | Thi Code](https://www.youtube.com/watch?v=bVzjKJL2b2M&t=792s) e [documentação](https://busy-sunspot-00c.notion.site/Settings-for-EC2-db344aed5235413d9e0f71e6d457ba90)
 
-  </div>
+   </div>
 
 <div>
 
@@ -240,13 +292,13 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
    ```
 
    ```bash
-   sudo docker-compose up -d postgres
+   docker compose up -d postgres
    ```
 
    Verifique se o container subiu e está ativo:
 
    ```bash
-   sudo docker ps
+   docker ps
    ```
 
    Deverá ter essa resposta:
@@ -257,6 +309,8 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
    fff11f1b839b   postgres:latest   "docker-entrypoint.s…"   8 seconds ago   Up 7 seconds   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   postgres_db
    ```
 
+Com isso você tem a confirmação do seu container deu certo. Próximo passo é [criar a instância da API](./api-instancia.md) para realizar a comunicação entre ambos.
+
   <h2>🏃🏻‍♀️ Próximos passos</h2>
 
 1.  [Criar instância da API](./api-instancia.md)
@@ -266,9 +320,44 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
 5.  <a href="#pop">(Opcional para testes) Popular banco de dados</a>
 6.  [Deploy do Frontend](./deploy_frontend.md)
 
+<details>
+<summary>✅ Todo-List</summary>
+
+1. - [x] [**Criação e Configuração da Instância EC2 do banco de dados na AWS**](./banco-instancia.md)
+   - - [x] Configurar security group para abrir a porta 5432 para a instância da API.
+   - - [x] Adicionar configurar, no diretório da API, um service:postgres no <kbd>docker-compose.yml</kbd> para criar container do postgres
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container do PostgreSQL
+2. - [ ] [**Criação e Configuração da Instância EC2 da API em nodejs na AWS**](./api-instancia.md)
+   - - [ ] Configurar security group para abrir a porta 3000 para teste externo e comunicação com o frontend
+   - - [ ] Mudar o IP de comunicação com o banco de dados para **_<IP da instância>:5432_**
+   - - [ ] Adicionar configurar, no diretório da API, um <kbd>Dockerfile</kbd> um service:api no <kbd>docker-compose.yml</kbd> para criar container da API
+   - - [ ] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [ ] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [ ] Baixar resposiório do GitHub
+   - - [ ] Realizar o docker-compose up do container da API
+3. - [ ] [**Deploy do Frontend**](./deploy_frontend.md)
+   - - [ ] Atualizar a URL da API no frontend para o IP da instância da API "http://<IP-da-instância-API>:3000"
+   - - [ ] Criar Bucket para hospedagem de sites estáticos no S3 com permissão de acesso público
+   - - [ ] Fazer o upload dos arquivos do build para o bucket do S3.
+4. - [ ] Realizar testes
+   - - [ ] **Banco de Dados:** Verificação das tabelas e dados inseridos manualmente.
+   - - [ ] **API:** Testes de requisições no Insomnia ou Postman confirmando comunicação com o banco.
+   - - [ ] **Frontend:** Requisições bem-sucedidas ao backend hospedado na instância da API.
+
+</details>
+
 <h2 id="api">🖧 Configuração da API (nodejs) - GitHub + docker-compose</h2>
 
-1. Configure o arquivo .env com suas credenciais;
+1. Acesse o diretório:
+
+   ```bash
+   cd D03_AWS_FULLSTACK_NOV24/GreenSphere-api/
+   ```
+
+2. Configure o arquivo .env com suas credenciais:
 
    ```bash
    nano .env
@@ -280,23 +369,19 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
     POSTGRES_USER=postgres
     POSTGRES_PASSWORD= sua-senha
     POSTGRES_DB= nome-db
-    DATABASE_URL=postgresql://postgres:sua-senha<IP-da-instância-DB>:5432/nome-db
+    DATABASE_URL=postgresql://postgres:sua-senha@<IP-da-instância-DB>:5432/nome-db
    ```
 
-2. Suba o container da API:
+3. Suba o container da API
 
    ```bash
-   cd D03_AWS_FULLSTACK_NOV24/GreenSphere-api/
-   ```
-
-   ```bash
-   sudo docker-compose up -d api
+   docker compose up -d api
    ```
 
    Verifique se o container subiu e está ativo:
 
    ```bash
-   sudo docker ps
+   docker ps
    ```
 
    Deverá ter essa resposta:
@@ -309,14 +394,39 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
 
   <h2>🏃🏻‍♀️ Próximos passos</h2>
 
-1.  [Criar instância da API](./api-instancia.md)
-2.  <a href="#docker">Instalação do Docker e Docker Compose</a>
-3.  <a href="#git">Conexão com repositório no GitHub</a>
-4.  <a href="#api">Configuração da API (nodejs) - GitHub + docker-compose</a>
-5.  <a href="#pop">(Opcional para testes) Popular banco de dados</a>
-6.  [Deploy do Frontend](./deploy_frontend.md)
+1.  <a href="#pop">Popular banco de dados</a>
+2.  [Deploy do Frontend](./deploy_frontend.md)
 
-<h2 id="pop"> Opcional: Popular banco de dados com dados fitícios para testes</h2>
+<details>
+<summary>✅ Todo-List</summary>
+
+1. - [x] [**Criação e Configuração da Instância EC2 do banco de dados na AWS**](./banco-instancia.md)
+   - - [x] Configurar security group para abrir a porta 5432 para a instância da API.
+   - - [x] Adicionar configurar, no diretório da API, um service:postgres no <kbd>docker-compose.yml</kbd> para criar container do postgres
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container do PostgreSQL
+2. - [x] [**Criação e Configuração da Instância EC2 da API em nodejs na AWS**](./api-instancia.md)
+   - - [x] Configurar security group para abrir a porta 3000 para teste externo e comunicação com o frontend
+   - - [x] Mudar o IP de comunicação com o banco de dados para **_<IP da instância>:5432_**
+   - - [x] Adicionar configurar, no diretório da API, um <kbd>Dockerfile</kbd> um service:api no <kbd>docker-compose.yml</kbd> para criar container da API
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container da API
+3. - [ ] [**Deploy do Frontend**](./deploy_frontend.md)
+   - - [ ] Atualizar a URL da API no frontend para o IP da instância da API "http://<IP-da-instância-API>:3000"
+   - - [ ] Criar Bucket para hospedagem de sites estáticos no S3 com permissão de acesso público
+   - - [ ] Fazer o upload dos arquivos do build para o bucket do S3.
+4. - [ ] Realizar testes
+   - - [ ] **Banco de Dados:** Verificação das tabelas e dados inseridos manualmente.
+   - - [ ] **API:** Testes de requisições no Insomnia ou Postman confirmando comunicação com o banco.
+   - - [ ] **Frontend:** Requisições bem-sucedidas ao backend hospedado na instância da API.
+
+</details>
+
+<h2 id="pop">Popular banco de dados com dados fitícios para testes</h2>
 
 **- Populando o Banco de Dados**
 
@@ -328,6 +438,12 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
 
    ```
    \dt
+   ```
+
+   Deverá ter essa resposta:
+
+   ```makefile
+   TABELA
    ```
 
    ```sql
@@ -372,6 +488,35 @@ Com isso tem-se a validação de que a rota está funcionando.
 
 1.  [Deploy do Frontend](./deploy_frontend.md)
 
+<details>
+<summary>✅ Todo-List</summary>
+
+1. - [x] [**Criação e Configuração da Instância EC2 do banco de dados na AWS**](./banco-instancia.md)
+   - - [x] Configurar security group para abrir a porta 5432 para a instância da API.
+   - - [x] Adicionar configurar, no diretório da API, um service:postgres no <kbd>docker-compose.yml</kbd> para criar container do postgres
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container do PostgreSQL
+2. - [x] [**Criação e Configuração da Instância EC2 da API em nodejs na AWS**](./api-instancia.md)
+   - - [x] Configurar security group para abrir a porta 3000 para teste externo e comunicação com o frontend
+   - - [x] Mudar o IP de comunicação com o banco de dados para **_<IP da instância>:5432_**
+   - - [x] Adicionar configurar, no diretório da API, um <kbd>Dockerfile</kbd> um service:api no <kbd>docker-compose.yml</kbd> para criar container da API
+   - - [x] Subir instância no EC2 com o sistema operacional Ubuntu
+   - - [x] [**Instalar o Docker e Docker Compose na instância**](./deploy_backend.md)
+   - - [x] Baixar resposiório do GitHub
+   - - [x] Realizar o docker-compose up do container da API
+3. - [ ] [**Deploy do Frontend**](./deploy_frontend.md)
+   - - [ ] Atualizar a URL da API no frontend para o IP da instância da API "http://<IP-da-instância-API>:3000"
+   - - [ ] Criar Bucket para hospedagem de sites estáticos no S3 com permissão de acesso público
+   - - [ ] Fazer o upload dos arquivos do build para o bucket do S3.
+4. - [ ] Realizar testes
+   - - [x] **Banco de Dados:** Verificação das tabelas e dados inseridos manualmente.
+   - - [x] **API:** Testes de requisições no Insomnia ou Postman confirmando comunicação com o banco.
+   - - [ ] **Frontend:** Requisições bem-sucedidas ao backend hospedado na instância da API.
+
+</details>
+
 <h2 id="colab">🖌 Autor</h2>
 
 <table align="center">
@@ -392,6 +537,7 @@ Com isso tem-se a validação de que a rota está funcionando.
 <h2 id="resources">📄 Links úteis</h2>
 
 - [🎥 Deploy React no S3 da AWS](https://www.youtube.com/watch?v=vosy6rEeOiw)
-- [📚 Backend Deploy](./deploy_backend.md)
-- [📚 Instância API](./api-instancia.md)
-- [📚 Instância DB](./banco-instancia.md)
+- [🛢️ Backend Deploy](./deploy_backend.md)
+- [🛢️ Instância API](./api-instancia.md)
+- [🛢️ Instância DB](./banco-instancia.md)
+- [⚛ Frontend Deploy](./deploy_frontend.md)
