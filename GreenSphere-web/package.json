@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "postinstall": "patch-package",
-    "deploy": "aws s3 sync dist/ s3://frontend-d3 --acl public-read --profile Miyata"
+    "deploy": "aws s3 sync dist/ s3://frontend-green-sphere --profile Miyata"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.21.0",
