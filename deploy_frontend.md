@@ -47,10 +47,7 @@ npm run build
 ```
 
 > [!WARNING]
->
-> <div style="border-left: 4px solid #FF9800; padding: 10px; background: rgba(255, 152, 0, 0.2);">
 > Certifique-se de que o script de build está configurado corretamente no <kbd>package.json</kbd>:
-> </div>
 
 ```json
   "scripts": {
@@ -76,11 +73,12 @@ npm run build
 ![alt text](./md/images/image-21.png)
 ![alt text](./md/images/image-23.png)
 
+</div>
+
 > [!IMPORTANT]
->
->  <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
->  <strong>Caution:</strong> Remova o bloqueio a acesso público
->  </div>
+> Remova o bloqueio a acesso público
+
+<div align="center">
 
 ![alt text](./md/images/image-24.png)
 ![alt text](./md/images/image-25.png)
@@ -108,13 +106,10 @@ Vá na aba de permissões e adicione uma política para permitir acesso público
 ![alt text](./md/images/image-31.png)
 ![alt text](./md/images/image-32.png)
 
-> [!IMPORTANT]
->
->   <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
->   Certifique-se de sua política estar assim ao final:
->   </div>
-
 </div>
+
+> [!IMPORTANT]
+> Certifique-se de sua política estar assim ao final:
 
 ```json
 {
@@ -131,13 +126,10 @@ Vá na aba de permissões e adicione uma política para permitir acesso público
 }
 ```
 
-<div align="center">
-
 > [!IMPORTANT]
->
->   <div style="border-left: 4px solid purple; padding: 10px; background: rgba(130, 80, 223, 0.2);">
->   Agora selecione todos os seus arquivos e torne-os públicos:
->   </div>
+> Agora selecione todos os seus arquivos e torne-os públicos:
+
+<div align="center">
 
 ![alt text](./md/images/image-34.png)
 
@@ -150,10 +142,7 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 </div>
 
 > [!NOTE]
->
-> <div style="border-left: 4px solid #2196F3; padding: 10px; background: rgba(33, 150, 243, 0.1);">
 > Parabéns por chegar até aqui! Você concluiu com sucesso o deploy da aplicação. 🎉
-> </div>
 
 <details>
 <summary>✅ Todo-List</summary>
@@ -187,16 +176,10 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 <br>
 
 > [!NOTE]
->
-> <div style="border-left: 4px solid #2196F3; padding: 10px; background: rgba(33, 150, 243, 0.1);">
->  Se encontrar um erro de "Acesso Negado", revise as configurações de bloqueio público e permissões no S3.
-> </div>
+> Se encontrar um erro de "Acesso Negado", revise as configurações de bloqueio público e permissões no S3.
 
 > [!TIP]
->
-> <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.1);">
 > Ainda tem dúvidas? Confira o vídeo "Deploy React no S3 da AWS" na seção de links úteis para obter mais detalhes.
-> </div>
 
 <h2 id="colab">🖌 Autor</h2>
 

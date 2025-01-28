@@ -57,11 +57,7 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
   ```
 
 > [!WARNING]
->
->  <div style="border-left: 4px solid #F44336; padding: 10px; background: rgba(244, 67, 54, 0.1);">
->    Caso não tenha feito essas etapas, recomendo que volte e siga as instruções.
-
-  </div>
+> Caso não tenha feito essas etapas, recomendo que volte e siga as instruções.
 
 </div>
 
@@ -158,12 +154,8 @@ Este documento tem como objetivo orientar no deploy da api e do banco de dados e
    Docker Compose version v2.32.4
   ```
 
-   <div style="border-left: 4px solid #4CAF50; padding: 10px; background: rgba(76, 175, 80, 0.3);">
-
-  Caso encontre dificuldades para chegar nesse resultado assista esse vídeo [AWS FÁCIL: Deploy de aplicação NodeJs + PostgreSQL no EC2](https://www.youtube.com/watch?v=iyiANe9Eszs&t=1483s)<br>
-  Ou, se quiser tentar de outra forma, siga esse vídeo [Como fazer um deploy na Aws de uma aplicação no Docker? | Thi Code](https://www.youtube.com/watch?v=bVzjKJL2b2M&t=792s) e [documentação](https://busy-sunspot-00c.notion.site/Settings-for-EC2-db344aed5235413d9e0f71e6d457ba90)
-
-   </div>
+  Caso encontre dificuldades para chegar nesse resultado assista esse vídeo [**_AWS FÁCIL: Deploy de aplicação NodeJs + PostgreSQL no EC2_**](https://www.youtube.com/watch?v=iyiANe9Eszs&t=1483s)<br>
+  Ou, se quiser tentar de outra forma, siga esse vídeo [**_Como fazer um deploy na Aws de uma aplicação no Docker? | Thi Code_**](https://www.youtube.com/watch?v=bVzjKJL2b2M&t=792s) e [**_documentação_**](https://busy-sunspot-00c.notion.site/Settings-for-EC2-db344aed5235413d9e0f71e6d457ba90)
 
 <div>
 
