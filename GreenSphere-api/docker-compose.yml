@@ -19,6 +19,11 @@ services:
     container_name: green_api
     environment:
       DATABASE_URL: ${DATABASE_URL}
+    command: >
+      sh -c "
+      npx prisma migrate deploy &&
+      npm start
+      "
     ports:
       - '3000:3000'
     restart: always
