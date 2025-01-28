@@ -13,13 +13,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      - name: Configurar chave SSH
+        run: |
+          echo "${{ secrets.EC2_KEY }}" > private_key.pem
+          chmod 600 private_key.pem
+
       - name: Deploy to API EC2
         env:
-          KEY: ${{ secrets.EC2_KEY }}
           HOST: ${{ secrets.API_HOST }}
           USER: ubuntu
         run: |
-          ssh -i "$KEY" $USER@$HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $USER@$HOST << 'EOF'
           set -e
           cd /home/ubuntu/D03_AWS_FULLSTACK_NOV24
           git pull origin main
@@ -46,4 +50,4 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          aws s3 sync dist/ s3://frontend-green-sphere --profile Miyata
+          aws s3 sync GreenSphere-web/dist/ s3://frontend-green-sphere --acl public-read
