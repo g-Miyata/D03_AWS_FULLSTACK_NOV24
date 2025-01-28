@@ -44,7 +44,7 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         else {
             console.error('Erro ao criar a planta:', error); // Log do erro
-            res.status(500).json({ error: 'Erro ao criar   a planta' });
+            res.status(500).json({ error: 'Erro ao criar a planta' });
         }
     }
 }));
