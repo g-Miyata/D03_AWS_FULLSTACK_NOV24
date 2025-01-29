@@ -48,7 +48,7 @@ O projeto foi implementado utilizando React, TypeScript e Clerk para autenticaç
 
 **Dados para login na aplicação:**
 
-- Link de acesso: ***https://tinyurl.com/green-sphere-store***
+- Link de acesso: ***https://tinyurl.com/project-green-sphere***
 - Clique em Sign In na tela inicial;
 - Clique para logar com google;
 
