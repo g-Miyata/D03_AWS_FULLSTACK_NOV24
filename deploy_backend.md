@@ -9,7 +9,7 @@
 
 ![AWS][AWS__BADGE]
 ![Postgres][Postgres__BADGE]
-![DOCKERa][DOCKER__BADGE]
+![DOCKER][DOCKER__BADGE]
 ![GitHub_][GitHub__BADGE]
 
 <a href="#about">Sobre</a> •

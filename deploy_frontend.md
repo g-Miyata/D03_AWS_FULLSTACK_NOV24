@@ -142,7 +142,7 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 </div>
 
 > [!NOTE]
-> Parabéns por chegar até aqui! Você concluiu com sucesso o deploy da aplicação. 🎉
+> Parabéns por chegar até aqui! Você concluiu com sucesso o deploy da aplicação. 🎉🚀
 
 <details>
 <summary>✅ Todo-List</summary>
@@ -181,6 +181,9 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 > [!TIP]
 > Ainda tem dúvidas? Confira o vídeo "Deploy React no S3 da AWS" na seção de links úteis para obter mais detalhes.
 
+> [!TIP]
+> Veja como [**🤖 Automatizar o Processo de Deploy!**](./deploy-automatizado.md)
+
 <h2 id="colab">🖌 Autor</h2>
 
 <table align="center">
@@ -204,3 +207,4 @@ Após concluir a configuração, acesse o endpoint público do bucket, disponív
 - [🛢️ Backend Deploy](./deploy_backend.md)
 - [🛢️ Instância API](./api-instancia.md)
 - [🛢️ Instância DB](./banco-instancia.md)
+- [🤖 Automatizar o Processo de Deploy](./deploy-automatizado.md)
