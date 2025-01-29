@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { validPlantTypeIds } from './validTypes';
-// let validPlantTypeIds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+// import { validPlantTypeIds } from './validTypes';
+const validPlantTypeIds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 export const formSchema = z.object({
   name: z.string().min(3, 'The plant name must have at least 3 characters.').max(40, 'The plant name must have at most 40 characters.'),
 
