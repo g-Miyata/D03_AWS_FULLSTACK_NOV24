@@ -16,7 +16,7 @@ const SignInPage = () => {
           </div>
         </div>
         <SignInButton mode="modal" forceRedirectUrl="/welcome">
-          <button>Login</button>
+          <button>Log In</button>
         </SignInButton>
       </div>
     </div>
