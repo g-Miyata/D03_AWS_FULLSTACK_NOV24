@@ -3,15 +3,17 @@ import { FormSchema } from '../../schemas/formSchema';
 import style from './Form.module.css';
 import Button from '../Button/Button';
 import usePostPlants from '../../hooks/API/usePostPlant';
-import defaultImg from '../../assets/images/default.png';
 import useFetchTypes from '../../hooks/API/useFetchTypes';
 import Loader from '../Loader/Loader';
 
 const Form = () => {
-  const { register, handleSubmit, reset, errors } = useForms();
+  const { register, handleSubmit, reset, errors, loadingSchema, defaultImg } = useForms();
   const { data: types, error, loading } = useFetchTypes();
   const { submitPlant, isSubmitting, message } = usePostPlants();
 
+  if (loadingSchema) {
+    return <Loader />;
+  }
   const onSubmit = async (data: FormSchema) => {
     const postData = {
       ...data,
