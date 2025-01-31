@@ -32,24 +32,114 @@ jobs:
           docker compose up -d api
           EOF
 
-  deploy-frontend:
+  # deploy-frontend:
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v3
+
+  #     - name: Build Frontend
+  #       run: |
+  #         cd GreenSphere-web
+  #         npm install
+  #         npm run build
+
+  #     - name: Deploy to S3
+  #       env:
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+  #         AWS_REGION: ${{ secrets.AWS_REGION }}
+  #       run: |
+  #         aws s3 sync GreenSphere-web/dist/ s3://frontend-green-sphere --profile Miyata
+
+  deploy-backend2:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Build Frontend
+      - name: Configurar chave SSH
         run: |
-          cd GreenSphere-web
-          npm install
-          npm run build
+          echo "${{ secrets.EC2_KEY2 }}" > private_key2.pem
+          chmod 600 private_key.pem
 
-      - name: Deploy to S3
+      - name: Deploy to API2 EC2
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
+          HOST: ${{ secrets.API_HOST2 }}
+          USER: ubuntu
         run: |
-          aws s3 sync GreenSphere-web/dist/ s3://frontend-green-sphere --profile Miyata
+          ssh -o StrictHostKeyChecking=no -i private_key2.pem ubuntu@$ec2-54-235-39-252.compute-1.amazonaws.com << 'EOF'
+          set -e
+          echo "Conectado ao EC2!"
+
+          if ! command -v docker &> /dev/null; then
+            echo "Instalando Docker..."
+            sudo apt-get update
+            sudo apt-get install -y ca-certificates curl gnupg
+            sudo install -m 0755 -d /etc/apt/keyrings
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+            sudo chmod a+r /etc/apt/keyrings/docker.gpg
+            echo "deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \$(. /etc/os-release && echo "\$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+            sudo apt-get update
+            sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            sudo groupadd docker || true  
+            sudo usermod -aG docker ubuntu
+            newgrp docker
+          fi
+
+          cd /home/ubuntu/D03_AWS_FULLSTACK_NOV24/GreenSphere-api
+          git reset --hard origin/main
+          git pull origin main
+          docker compose down
+          docker compose up -d api
+
+          echo "Deploy concluído!"
+          EOF
+
+  deploy-postgres:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configurar chave SSH
+        run: |
+          echo "${{ secrets.EC2_KEY2 }}" > private_key2.pem
+          chmod 600 private_key.pem
+
+      - name: Deploy to DB EC2
+        env:
+          HOST: ${{ secrets.API_HOST3 }}
+          USER: ubuntu
+        run: |
+          ssh -o StrictHostKeyChecking=no -i private_key2.pem ubuntu@ec2-23-22-200-70.compute-1.amazonaws.com << 'EOF'
+          set -e
+          echo "Conectado ao EC2!"
+
+          if ! command -v docker &> /dev/null; then
+            echo "Instalando Docker..."
+            sudo apt-get update
+            sudo apt-get install -y ca-certificates curl gnupg
+            sudo install -m 0755 -d /etc/apt/keyrings
+            curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+            sudo chmod a+r /etc/apt/keyrings/docker.gpg
+            echo "deb [arch=\$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \$(. /etc/os-release && echo "\$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+            sudo apt-get update
+            sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+            sudo groupadd docker || true  
+            sudo usermod -aG docker ubuntu
+            newgrp docker
+          fi
+
+          cd /home/ubuntu/D03_AWS_FULLSTACK_NOV24/GreenSphere-api
+          git reset --hard origin/main
+          git pull origin main
+          docker compose down
+          docker compose up -d postgres
+
+          echo "Deploy concluído!"
+          EOF
