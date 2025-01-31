@@ -1,13 +1,17 @@
 import { z } from 'zod';
-// import { validPlantTypeIds } from './validTypes';
-const validPlantTypeIds: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+import { loadValidPlantTypes, getValidPlantTypeIds } from './validTypes';
+
+await loadValidPlantTypes(); // Aguarda carregar antes de criar o schema
+
+const validPlantTypeIds = getValidPlantTypeIds();
+
 export const formSchema = z.object({
   name: z.string().min(3, 'The plant name must have at least 3 characters.').max(40, 'The plant name must have at most 40 characters.'),
 
   subtitle: z.string().min(3, 'The subtitle must have at least 3 characters.').max(50, 'The subtitle must have at most 50 characters.'),
 
   typeId: z.number().refine((id) => validPlantTypeIds.includes(id), {
-    message: 'Invalid plant type. Please select a valid type.',
+    message: 'You must select a plant type.',
   }),
 
   price: z

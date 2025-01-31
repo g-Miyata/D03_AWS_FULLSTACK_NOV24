@@ -50,12 +50,12 @@ const Form = () => {
         <label htmlFor="type-select">Plant type {errors.typeId && <small className={style.errorMessage}>{errors.typeId.message}</small>} </label>
         <select
           id="type-select"
-          defaultValue=""
+          defaultValue="-1"
           {...register('typeId', {
             valueAsNumber: true,
           })}
         >
-          <option value="" disabled className={style.option}>
+          <option value="-1" disabled className={style.option}>
             -- Select a Type --
           </option>
           {types.map((type) => (
