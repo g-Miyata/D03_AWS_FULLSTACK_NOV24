@@ -49,13 +49,10 @@ O projeto foi implementado utilizando React, TypeScript e Clerk para autenticaç
 **Dados para login na aplicação:**
 
 - Link de acesso: ***https://tinyurl.com/project-green-sphere***
-- Clique em Sign In na tela inicial;
-- Clique para logar com google;
-
-  ![alt text](./md/images/imagegoogle.png)
-
-- email: _desafio3uolcompass@gmail.com_
-- senha: _desafio3compass_
+- Clique em Log In na tela inicial;
+- Digite o username: _compass_
+- Clique em <kbd>continue</kbd>
+- Digite a password: _desafio3compass_
 
 <h2 id='deploy'>☁️ Como Realizar o Deploy</h2>
 
