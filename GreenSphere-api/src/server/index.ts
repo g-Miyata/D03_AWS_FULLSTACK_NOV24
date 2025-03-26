@@ -5,7 +5,9 @@ import getPlants from './routes/getPlants';
 import deletePlant from './routes/deletePlant';
 import typeRoute from './routes/typeRoute';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 const PORT = 3000;
 const prisma = new PrismaClient();
