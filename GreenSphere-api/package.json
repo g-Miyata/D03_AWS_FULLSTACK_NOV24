@@ -12,6 +12,9 @@
     "start": "node dist/server/index.js",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^6.1.0",
     "cors": "^2.8.5",

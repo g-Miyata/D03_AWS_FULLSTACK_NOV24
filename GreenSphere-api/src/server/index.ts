@@ -12,7 +12,7 @@ const app = express();
 const PORT = 3000;
 const prisma = new PrismaClient();
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: 'https://green-sphere-ivory.vercel.app' }));
 // app.get('/', (req, res) => {
 //     res.json({ message: 'teste com typescript' })
 // })
