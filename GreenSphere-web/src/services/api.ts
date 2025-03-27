@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+const baseUrl = import.meta.env.VITE_BASE_URL;
 const api = axios.create({
   // baseURL: 'http://18.212.72.16:3000',
-  baseURL: 'http://localhost:3000',
+  baseURL: baseUrl,
   timeout: 5000,
 });
 
