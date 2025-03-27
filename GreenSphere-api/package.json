@@ -8,7 +8,7 @@
   "main": "dist/server/index.js",
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server/index.ts",
-    "build": "rm -rf dist && tsc",
+    "build": "rm -rf dist && tsc ",
     "start": "node dist/server/index.js"
   },
   "dependencies": {
